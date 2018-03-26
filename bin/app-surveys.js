@@ -16,7 +16,8 @@ const done = function () { // eslint-disable-line no-unused-vars
 // CRUD Actions
 const create = function (title, _owner) {
   Survey.create({
-    title
+    title,
+    _owner
   })
   .then(console.log)
   .catch(console.error)
@@ -72,7 +73,8 @@ db.once('open', function () {
   switch (command) {
     case 'create':
       const title = process.argv[3]
-      create(title)
+      const _owner = process.argv[4]
+      create(title, _owner)
 
       break
 
