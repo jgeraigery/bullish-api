@@ -10,6 +10,7 @@ const setModel = require('./concerns/set-mongoose-model')
 
 const index = (req, res, next) => {
   Survey.find()
+    .populate('questions')
     .then(surveys => res.json({
       surveys: surveys.map((e) =>
         e.toJSON({ virtuals: true, user: req.user }))
@@ -18,16 +19,13 @@ const index = (req, res, next) => {
 }
 
 const show = (req, res) => {
-  console.log('req is ', req)
-  console.log('res is ', res)
-  console.log('res.body is ', res.body)
-  Survey.findById(req._survey_id)
+  // console.log(req)
+  Survey.findById(req.survey._id)
   .populate('questions')
-    .then(console.log)
-
-  res.json({
-    survey: req.survey.toJSON({ virtuals: true, user: req.user })
-  })
+    .then(survey => res.json({
+      survey: req.survey.toJSON({ virtuals: true, user: req.user })
+    }))
+    .catch(console.error)
 }
 
 const create = (req, res, next) => {

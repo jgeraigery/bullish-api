@@ -7,12 +7,12 @@ const questionSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  _owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  _survey_id: {
+  // _owner: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'User',
+  //   required: true
+  // },
+  _surveyId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Survey',
     required: true
