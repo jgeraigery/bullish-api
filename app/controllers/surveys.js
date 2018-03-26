@@ -18,6 +18,13 @@ const index = (req, res, next) => {
 }
 
 const show = (req, res) => {
+  console.log('req is ', req)
+  console.log('res is ', res)
+  console.log('res.body is ', res.body)
+  Survey.findById(req._survey_id)
+  .populate('questions')
+    .then(console.log)
+
   res.json({
     survey: req.survey.toJSON({ virtuals: true, user: req.user })
   })
