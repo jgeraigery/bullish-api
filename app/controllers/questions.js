@@ -3,6 +3,7 @@
 const controller = require('lib/wiring/controller')
 const models = require('app/models')
 const Question = models.question
+const Survey = models.survey
 
 const authenticate = require('./concerns/authenticate')
 const setUser = require('./concerns/set-current-user')
@@ -28,6 +29,8 @@ const create = (req, res, next) => {
     _owner: req.user._id
   })
   Question.create(question)
+    .then((sdf) => console.log('Survey is ', Survey))
+    .then(Survey.questions.push(question._id))
     .then(question =>
       res.status(201)
         .json({

@@ -3,18 +3,21 @@
 const controller = require('lib/wiring/controller')
 const models = require('app/models')
 const Survey = models.survey
+const Question = models.question
 
 const authenticate = require('./concerns/authenticate')
 const setUser = require('./concerns/set-current-user')
 const setModel = require('./concerns/set-mongoose-model')
 
 const index = (req, res, next) => {
+  console.log('Question is ', Question)
   Survey.find()
     .populate('questions')
     .then(surveys => res.json({
       surveys: surveys.map((e) =>
         e.toJSON({ virtuals: true, user: req.user }))
     }))
+    .then((blah) => console.log('blah is ', blah))
     .catch(next)
 }
 
@@ -22,9 +25,14 @@ const show = (req, res) => {
   // console.log(req)
   Survey.findById(req.survey._id)
   .populate('questions')
-    .then(survey => res.json({
-      survey: req.survey.toJSON({ virtuals: true, user: req.user })
-    }))
+  .then((survey) => {
+    console.log('survey is', survey)
+    console.log('req.survey is', req.survey)
+    return survey
+  })
+  .then(survey => res.json({
+    survey: survey.toJSON({ virtuals: true, user: req.user }) // using req.survey
+  }))
     .catch(console.error)
 }
 
