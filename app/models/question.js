@@ -11,6 +11,11 @@ const questionSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
+  },
+  _survey_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Survey',
+    required: true
   }
 }, {
   timestamps: true,
