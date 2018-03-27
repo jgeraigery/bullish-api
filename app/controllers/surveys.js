@@ -30,19 +30,17 @@ const show = (req, res) => {
 
 const create = (req, res, next) => {
   const survey = Object.assign(req.body.survey, {
-    surveyOptions: [req.body.survey.surveyOptions],
-    // _owner: req.user._id,
-    responses: [req.body.survey.responses]
+    optionOne: req.body.survey.optionOne,
+    optionTwo: req.body.survey.optionTwo,
+    _owner: req.user._id
   })
-  console.log('survey is ', survey)
-
-  // Survey.create(survey)
-  //   .then(survey =>
-  //     res.status(201)
-  //       .json({
-  //         survey: survey.toJSON({ virtuals: true, user: req.user })
-  //       }))
-  //   .catch(next)
+  Survey.create(survey)
+    .then(survey =>
+      res.status(201)
+        .json({
+          survey: survey.toJSON({ virtuals: true, user: req.user })
+        }))
+    .catch(next)
 }
 
 const update = (req, res, next) => {

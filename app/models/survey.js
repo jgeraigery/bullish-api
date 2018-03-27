@@ -3,10 +3,14 @@
 const mongoose = require('mongoose')
 
 const surveySchema = new mongoose.Schema({
-  surveyOptions: [{
+  optionOne: {
     type: String,
     required: true
-  }],
+  },
+  optionTwo: {
+    type: String,
+    required: true
+  },
   responses: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Response'
