@@ -10,7 +10,7 @@ module.exports = require('lib/wiring/routes')
 // standards RESTful routes
 .resources('examples')
 .resources('surveys')
-.resources('questions')
+.resources('responses')
 
 // get rid of new edit routes TODO is this a rails issue?
 
