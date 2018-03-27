@@ -3,6 +3,7 @@
 const controller = require('lib/wiring/controller')
 const models = require('app/models')
 const Response = models.response
+const Survey = models.survey
 
 const authenticate = require('./concerns/authenticate')
 const setUser = require('./concerns/set-current-user')
@@ -27,12 +28,23 @@ const create = (req, res, next) => {
   const response = Object.assign(req.body.response, {
     _owner: req.user._id
   })
+
+  let savedResponse
+  let foundSurvey
+  // creating response to survey instance
   Response.create(response)
-    .then(response =>
-      res.status(201)
-        .json({
-          response: response.toJSON({ virtuals: true, user: req.user })
-        }))
+    .then(response => {
+      savedResponse = response
+      return response
+    })
+    .then(() => {
+      Survey.findById(savedResponse.surveyId)
+        .then(survey => {
+          foundSurvey = survey
+          foundSurvey.responses.push(savedResponse)
+          console.log(foundSurvey)
+        })
+    })
     .catch(next)
 }
 
