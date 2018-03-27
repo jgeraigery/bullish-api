@@ -29,21 +29,28 @@ const create = (req, res, next) => {
     _owner: req.user._id
   })
 
-  let savedResponse
-  let foundSurvey
+  // let savedResponse
   // creating response to survey instance
   Response.create(response)
-    .then(response => {
-      savedResponse = response
-      return response
+    .then(resultOfResponseCreate => {
+      // savedResponse = resultOfResponseCreate
+      // console.log('in 1st promise chain, resultOfResponseCreate is ', resultOfResponseCreate)
+      return resultOfResponseCreate
     })
-    .then(() => {
-      Survey.findById(savedResponse.surveyId)
+    .then((resultOfResponseCreate) => {
+      Survey.findById(response.surveyId)
         .then(survey => {
-          foundSurvey = survey
-          foundSurvey.responses.push(savedResponse)
-          console.log(foundSurvey)
+          console.log('response is ', resultOfResponseCreate)
+          survey.responses.push(resultOfResponseCreate._id)
+          console.log('survey is ', survey)
+          return resultOfResponseCreate
         })
+        .then(resultOfResponseCreate =>
+          res.status(201)
+            .json({
+              resultOfResponseCreate: resultOfResponseCreate.toJSON({ virtuals: true, user: req.user })
+            }))
+        .catch(next)
     })
     .catch(next)
 }
