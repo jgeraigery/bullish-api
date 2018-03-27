@@ -3,50 +3,46 @@
 const controller = require('lib/wiring/controller')
 const models = require('app/models')
 const Survey = models.survey
-const Question = models.question
+// const Response = models.response
 
 const authenticate = require('./concerns/authenticate')
 const setUser = require('./concerns/set-current-user')
 const setModel = require('./concerns/set-mongoose-model')
 
 const index = (req, res, next) => {
-  console.log('Question is ', Question)
   Survey.find()
-    .populate('questions')
-    .then(surveys => res.json({
-      surveys: surveys.map((e) =>
-        e.toJSON({ virtuals: true, user: req.user }))
-    }))
-    .then((blah) => console.log('blah is ', blah))
-    .catch(next)
+  .then(surveys => res.json({
+    surveys: surveys.map((e) =>
+      e.toJSON({ virtuals: true, user: req.user }))
+  }))
+  .catch(next)
 }
 
 const show = (req, res) => {
   // console.log(req)
   Survey.findById(req.survey._id)
-  .populate('questions')
-  .then((survey) => {
-    console.log('survey is', survey)
-    console.log('req.survey is', req.survey)
-    return survey
-  })
   .then(survey => res.json({
-    survey: survey.toJSON({ virtuals: true, user: req.user }) // using req.survey
+    survey: survey.toJSON({ virtuals: true, user: req.user })
   }))
+    .then(survey => console.log(survey))
     .catch(console.error)
 }
 
 const create = (req, res, next) => {
   const survey = Object.assign(req.body.survey, {
-    _owner: req.user._id
+    surveyOptions: [req.body.survey.surveyOptions],
+    // _owner: req.user._id,
+    responses: [req.body.survey.responses]
   })
-  Survey.create(survey)
-    .then(survey =>
-      res.status(201)
-        .json({
-          survey: survey.toJSON({ virtuals: true, user: req.user })
-        }))
-    .catch(next)
+  console.log('survey is ', survey)
+
+  // Survey.create(survey)
+  //   .then(survey =>
+  //     res.status(201)
+  //       .json({
+  //         survey: survey.toJSON({ virtuals: true, user: req.user })
+  //       }))
+  //   .catch(next)
 }
 
 const update = (req, res, next) => {

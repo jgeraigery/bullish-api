@@ -29,8 +29,8 @@ const create = (req, res, next) => {
     _owner: req.user._id
   })
   Question.create(question)
-    .then((sdf) => console.log('Survey is ', Survey))
-    .then(Survey.questions.push(question._id))
+    .then(() => Survey.findById())
+    .then(survey => survey.questions.push(question._id))
     .then(question =>
       res.status(201)
         .json({

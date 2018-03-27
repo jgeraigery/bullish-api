@@ -2,15 +2,17 @@
 
 const mongoose = require('mongoose')
 
-const surveySchema = new mongoose.Schema({
-  surveyOptions: [{
-    type: String,
+const responseSchema = new mongoose.Schema({
+  selected: {
+    type: Number,
+    min: 0,
+    max: 1,
     required: true
-  }],
-  responses: [{
+  },
+  surveyId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Response'
-  }],
+    ref: 'Survey'
+  },
   _owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -28,10 +30,10 @@ const surveySchema = new mongoose.Schema({
   }
 })
 
-// surveySchema.virtual('length').get(function length () {
-//   return this.title.length
+// responseSchema.virtual('length').get(function length () {
+//   return this.text.length
 // })
 
-const Survey = mongoose.model('Survey', surveySchema)
+const Response = mongoose.model('Response', responseSchema)
 
-module.exports = Survey
+module.exports = Response
