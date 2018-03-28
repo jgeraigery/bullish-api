@@ -64,8 +64,8 @@ module.exports = controller({
   update,
   destroy
 }, { before: [
-  { method: setUser, only: ['index', 'show'] },
-  { method: authenticate, except: ['index', 'show'] },
-  { method: setModel(Survey), only: ['show'] },
+  // { method: setUser, only: ['index', 'show'] },
+  { method: authenticate },
+  { method: setModel(Survey), only: ['index', 'show'] },
   { method: setModel(Survey, { forUser: true }), only: ['update', 'destroy'] }
 ] })
