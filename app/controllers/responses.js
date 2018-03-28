@@ -41,7 +41,9 @@ const create = (req, res, next) => {
       Survey.findById(response.surveyId)
         .then(survey => {
           console.log('response is ', resultOfResponseCreate)
-          survey.responses.push(resultOfResponseCreate._id)
+          survey.responses.push(resultOfResponseCreate.selected)
+          // something like .save() will work?????
+          survey.save()
           console.log('survey is ', survey)
           return resultOfResponseCreate
         })

@@ -11,10 +11,15 @@ const surveySchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  responses: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Response'
-  }],
+  responses: [
+    // if we want to pass in ResponseIds, we'll need to have this ref Object
+    // but if we just want to pass in 1s and 0s (the response selections) then
+    // responses should be of type Number, as seen above
+    // {
+    // type: mongoose.Schema.Types.ObjectId,
+    // ref: 'Response'
+  // }
+  ],
   _owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
