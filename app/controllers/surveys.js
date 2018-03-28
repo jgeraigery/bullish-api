@@ -10,6 +10,7 @@ const setUser = require('./concerns/set-current-user')
 const setModel = require('./concerns/set-mongoose-model')
 
 const index = (req, res, next) => {
+  console.log('we are inside index right now')
   Survey.find()
   .then(surveys => res.json({
     surveys: surveys.map((e) =>
@@ -64,8 +65,8 @@ module.exports = controller({
   update,
   destroy
 }, { before: [
-  // { method: setUser, only: ['index', 'show'] },
-  { method: authenticate },
-  { method: setModel(Survey), only: ['index', 'show'] },
+  { method: setUser, only: ['index', 'show'] },
+  { method: authenticate, except: ['index', 'show'] },
+  { method: setModel(Survey), only: ['show'] },
   { method: setModel(Survey, { forUser: true }), only: ['update', 'destroy'] }
 ] })
