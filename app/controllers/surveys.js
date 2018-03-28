@@ -24,7 +24,7 @@ const show = (req, res) => {
   .then(survey => res.json({
     survey: survey.toJSON({ virtuals: true, user: req.user })
   }))
-    .then(survey => console.log(survey))
+    .then(survey => console.log('req.survey is ', req.survey))
     .catch(console.error)
 }
 
