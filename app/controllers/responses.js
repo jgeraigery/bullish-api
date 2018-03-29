@@ -39,6 +39,7 @@ const create = (req, res, next) => {
     .then(survey => {
       survey.responses.push(savedResponse.selected)
       survey.save()
+      // unhandled error, can be avoided by returning survey.save()
       return savedResponse
     })
     .then(savedResponse =>
