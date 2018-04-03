@@ -11,7 +11,8 @@ curl "${API}${URL_PATH}" \
   --data '{
     "survey": {
       "optionOne": "'"${OPTION1}"'",
-      "optionTwo": "'"${OPTION2}"'"
+      "optionTwo": "'"${OPTION2}"'",
+      "optionThree": "'"${OPTION3}"'"
     }
   }'
 echo

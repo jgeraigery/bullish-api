@@ -11,6 +11,10 @@ const surveySchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  optionThree: {
+    type: String,
+    required: true
+  },
   responses: [
     // if we want to pass in ResponseIds, we'll need to have this ref Object
     // but if we just want to pass in 1s and 0s (the response selections) then

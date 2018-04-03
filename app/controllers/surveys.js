@@ -33,6 +33,7 @@ const create = (req, res, next) => {
   const survey = Object.assign(req.body.survey, {
     optionOne: req.body.survey.optionOne,
     optionTwo: req.body.survey.optionTwo,
+    optionThree: req.body.survey.optionThree,
     _owner: req.user._id
   })
   Survey.create(survey)
