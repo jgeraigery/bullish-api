@@ -6,7 +6,7 @@ const responseSchema = new mongoose.Schema({
   selected: {
     type: Number,
     min: 0,
-    max: 1,
+    max: 2,
     required: true
   },
   surveyId: {
