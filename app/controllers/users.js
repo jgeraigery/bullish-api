@@ -62,7 +62,7 @@ const signup = (req, res, next) => {
         res.status(201).json({ user }))
       .catch(makeErrorHandler(res, next))
   } else {
-    console.log('password fail!')
+    return res.status(400).send()
   }
 }
 
