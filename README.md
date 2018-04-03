@@ -1,6 +1,9 @@
 # Bullish-API
 
-This API contains user, survey, and response resources that one can fully CRUD on.
+This API contains user, survey, and response resources that one can CRUD on.
+It's a survey app that allow the user to create a survey with three options. Once the survey
+has been created the user will be able to let another user vote for one of the
+options.
 
 ## Getting Started
 
@@ -19,6 +22,30 @@ Peer programming! We started using CURL scripts to fully CRUD on users and surve
 We used the git workflow demonstrated during class. Never working on master, and working on development as little as possible, we made feature branches off of the development branch and then would submit a PR and merge them into development. Only during the final stages of development did we start merging the development branch into the master branch.
 
 We conducted daily standups each morning to talk about our goals for the day and if we were stuck with any blocks. Additionally the team would regroup at the end of the day (and sometimes during lunch) to check in on each others progress and ensure we were all on the same page.
+
+## API End Points
+
+| Verb   | URI Pattern                 | Controller#Action         |
+|--------|-----------------------------|---------------------------|
+| POST   | `/sign-up`                  | `users#signup`            |
+| POST   | `/sign-in`                  | `users#signin`            |
+| DELETE | `/sign-out`                 | `users#signout`           |
+| PATCH  | `/change-password`          | `users#changepw`          |
+| GET    | `/surveys`                  | `surveys#index`           |
+| POST   | `/surveys`                  | `surveys#create`          |
+| GET    | `/surveys/:id`              | `surveys#show`            |
+| PATCH  | `/surveys/:id`              | `surveys#update`          |
+| DELETE | `/surveys/:id`              | `surveys#destroy`         |
+| GET    | `/responses`                | `responses#index`         |
+| POST   | `/responses`                | `responses#create`        |
+| GET    | `/responses/:id`            | `responses#show`          |
+| PATCH  | `/responses/:id`            | `responses#update`        |
+| DELETE | `/responses/:id`            | `responses#destroy`       |
+
+
+Add CommentCollapse 
+
+Add CommentCollapse 
 
 ## Unsolved Issues/Future Iterations
 
