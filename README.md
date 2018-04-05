@@ -42,11 +42,6 @@ We conducted daily standups each morning to talk about our goals for the day and
 | PATCH  | `/responses/:id`            | `responses#update`        |
 | DELETE | `/responses/:id`            | `responses#destroy`       |
 
-
-Add CommentCollapse 
-
-Add CommentCollapse 
-
 ## Unsolved Issues/Future Iterations
 
 * We want to set Survey.responses back to an empty array when the survey gets updated, so survey creators can't troll people who've responded by changing the survey after people have voted. But for right now, this is a feature. The secret name of this project is Troll Poll
