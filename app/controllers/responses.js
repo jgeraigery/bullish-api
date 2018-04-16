@@ -64,6 +64,8 @@ const destroy = (req, res, next) => {
     .catch(next)
 }
 
+// if(user.admin || user.id === _user.id)
+
 module.exports = controller({
   index,
   show,
